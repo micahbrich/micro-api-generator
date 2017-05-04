@@ -1,0 +1,9 @@
+{
+  "generator-node": {
+    "promptValues": {
+      "authorName": "micah rich",
+      "authorEmail": "micah@micahrich.com",
+      "authorUrl": "micahrich.com"
+    }
+  }
+}

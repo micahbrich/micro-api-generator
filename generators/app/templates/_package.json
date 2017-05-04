@@ -1,0 +1,16 @@
+{
+  "name": "<%= name %>",
+  "scripts": {
+    "dev": "micro",
+    "start": "micro"
+  },
+  "dependencies": {
+    "microrouter": "^2.1.0",
+    "micro-post": "^1.0.0",
+    "micro-get": "^0.1.1",
+    "micro-compress": "^1.0.0",
+    "micro": "^7.3.2",
+    "micro-cors": "^0.0.4",
+    "micro-boom": "^1.1.0"
+  }
+}
