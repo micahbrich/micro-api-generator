@@ -1,5 +1,5 @@
 # generator-micro-api [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
-> create a quick microservice api using zeit&#39;s micro
+> create a quick & tiny microservice api using zeit&#39;s micro
 
 ## Installation
 
@@ -16,12 +16,42 @@ Then generate your new project:
 yo micro-api
 ```
 
-## Getting To Know Yeoman
+## End Result
 
- * Yeoman has a heart of gold.
- * Yeoman is a person with feelings and opinions, but is very easy to work with.
- * Yeoman can be too opinionated at times but is easily convinced not to be.
- * Feel free to [learn more about Yeoman](http://yeoman.io/).
+This just installs a bunch of useful API-related modules to throw together a microservice. The default template gives you a super-simple structure:
+
+```
+├── index.js
+├── node_modules
+├── package.json
+└── yarn.lock
+```
+
+It makes a single-file microservice for you, defaulting to only accepting `POST` requests, a compressed response, and simple readable errors to throw using [`micro-boom`](https://github.com/onbjerg/micro-boom). 
+
+Uses [`micro-post`](https://github.com/romuloalves/micro-post) by default, but has [`micro-get`](https://github.com/romuloalves/micro-get) for easily switching to a `GET` service instead, and/or [`microrouter`](https://github.com/pedronauck/micro-router) for more complex stuff. Just import 'em and use 'em, they're installed already.
+
+```js
+const { send, json } = require('micro')
+const post = require('micro-post')
+const compress = require('micro-compress')
+const { handleErrors, createError } = require('micro-boom')
+const cors = require('micro-cors')({
+  allowMethods: ['POST', 'OPTIONS'],
+  origin: '*'
+})
+
+let app = post(async(req, res) => {
+  const data = await json(req)
+  return data
+})
+
+app = handleErrors(app)
+app = compress(app)
+app = cors(app)
+module.exports = app
+
+```
 
 ## License
 
